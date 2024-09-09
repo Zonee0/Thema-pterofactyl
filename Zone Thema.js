@@ -30,7 +30,7 @@ display_welcome() {
   clear
 }
 
-#Update and install jq
+# Update and install jq
 install_jq() {
   echo -e "                                                       "
   echo -e "${BLUE}[+] =============================================== [+]${NC}"
@@ -52,26 +52,6 @@ install_jq() {
   fi
   echo -e "                                                       "
   sleep 1
-  clear
-}
-#Check user token
-check_token() {
-  echo -e "                                                       "
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "${BLUE}[+]               LICENSY HELLZONE OFFC             [+]${NC}"
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "                                                       "
-  TOKEN=$(jq -r '.token' token.json)
-
-  echo -e "${YELLOW}MASUKAN AKSES TOKEN :${NC}"
-  read -r USER_TOKEN
-
-  if [ "$USER_TOKEN" = "zone" ]; then
-    echo -e "${GREEN}AKSES BERHASIL${NC}}"
-  else
-    echo -e "${GREEN}AKSES GAGAL${NC}"
-    exit 1
-  fi
   clear
 }
 
@@ -111,74 +91,74 @@ install_theme() {
         ;;
     esac
   done
-  
-if [ -e /root/pterodactyl ]; then
+
+  if [ -e /root/pterodactyl ]; then
     sudo rm -rf /root/pterodactyl
   fi
   wget -q "$THEME_URL"
   sudo unzip -o "$(basename "$THEME_URL")"
   
-if [ "$SELECT_THEME" -eq 1 ]; then
-  echo -e "                                                       "
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "${BLUE}[+]                  INSTALLASI THEMA               [+]${NC}"
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "                                                                   "
-  sudo cp -rfT /root/pterodactyl /var/www/pterodactyl
-  curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-  sudo apt install -y nodejs
-  sudo npm i -g yarn
-  cd /var/www/pterodactyl
-  yarn add react-feather
-  php artisan migrate
-  yarn build:production
-  php artisan view:clear
-  sudo rm /root/C2.zip
-  sudo rm -rf /root/pterodactyl
+  if [ "$SELECT_THEME" -eq 1 ]; then
+    echo -e "                                                       "
+    echo -e "${BLUE}[+] =============================================== [+]${NC}"
+    echo -e "${BLUE}[+]                  INSTALLASI THEMA               [+]${NC}"
+    echo -e "${BLUE}[+] =============================================== [+]${NC}"
+    echo -e "                                                                   "
+    sudo cp -rfT /root/pterodactyl /var/www/pterodactyl
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+    sudo apt install -y nodejs
+    sudo npm i -g yarn
+    cd /var/www/pterodactyl
+    yarn add react-feather
+    php artisan migrate
+    yarn build:production
+    php artisan view:clear
+    sudo rm /root/C2.zip
+    sudo rm -rf /root/pterodactyl
 
-  echo -e "                                                       "
-  echo -e "${GREEN}[+] =============================================== [+]${NC}"
-  echo -e "${GREEN}[+]                   INSTALL SUCCESS               [+]${NC}"
-  echo -e "${GREEN}[+] =============================================== [+]${NC}"
-  echo -e ""
-  sleep 2
-  clear
-  return
+    echo -e "                                                       "
+    echo -e "${GREEN}[+] =============================================== [+]${NC}"
+    echo -e "${GREEN}[+]                   INSTALL SUCCESS               [+]${NC}"
+    echo -e "${GREEN}[+] =============================================== [+]${NC}"
+    echo -e ""
+    sleep 2
+    clear
+    return
 
-elif [ "$SELECT_THEME" -eq 2 ]; then
-  echo -e "                                                       "
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "${BLUE}[+]                  INSTALLASI THEMA               [+]${NC}"
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "                                                       "
-  sudo cp -rfT /root/pterodactyl /var/www/pterodactyl
-  curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-  sudo apt install -y nodejs
-  npm i -g yarn
-  cd /var/www/pterodactyl
-  yarn add react-feather
-  php artisan billing:install stable
-  php artisan migrate
-  yarn build:production
-  php artisan view:clear
-  sudo rm /root/C1.zip
-  sudo rm -rf /root/pterodactyl
+  elif [ "$SELECT_THEME" -eq 2 ]; then
+    echo -e "                                                       "
+    echo -e "${BLUE}[+] =============================================== [+]${NC}"
+    echo -e "${BLUE}[+]                  INSTALLASI THEMA               [+]${NC}"
+    echo -e "${BLUE}[+] =============================================== [+]${NC}"
+    echo -e "                                                       "
+    sudo cp -rfT /root/pterodactyl /var/www/pterodactyl
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+    sudo apt install -y nodejs
+    npm i -g yarn
+    cd /var/www/pterodactyl
+    yarn add react-feather
+    php artisan billing:install stable
+    php artisan migrate
+    yarn build:production
+    php artisan view:clear
+    sudo rm /root/C1.zip
+    sudo rm -rf /root/pterodactyl
 
-  echo -e "                                                       "
-  echo -e "${GREEN}[+] =============================================== [+]${NC}"
-  echo -e "${GREEN}[+]                  INSTALL SUCCESS                [+]${NC}"
-  echo -e "${GREEN}[+] =============================================== [+]${NC}"
-  echo -e "                                                       "
-  sleep 2
-  clear
-  return
+    echo -e "                                                       "
+    echo -e "${GREEN}[+] =============================================== [+]${NC}"
+    echo -e "${GREEN}[+]                  INSTALL SUCCESS                [+]${NC}"
+    echo -e "${GREEN}[+] =============================================== [+]${NC}"
+    echo -e "                                                       "
+    sleep 2
+    clear
+    return
 
-elif [ "$SELECT_THEME" -eq 3 ]; then
-  echo -e "                                                       "
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "${BLUE}[+]                  INSTALLASI THEMA               [+]${NC}"
-  echo -e "${BLUE}[+] =============================================== [+]${NC}"
-  echo -e "                                                                   "
+  elif [ "$SELECT_THEME" -eq 3 ]; then
+    echo -e "                                                       "
+    echo -e "${BLUE}[+] =============================================== [+]${NC}"
+    echo -e "${BLUE}[+]                  INSTALLASI THEMA               [+]${NC}"
+    echo -e "${BLUE}[+] =============================================== [+]${NC}"
+    echo -e "                                                                   "
 
     # Menanyakan informasi kepada pengguna untuk tema Enigma
     echo -e "${YELLOW}Masukkan link wa (https://wa.me...) : ${NC}"
@@ -192,32 +172,30 @@ elif [ "$SELECT_THEME" -eq 3 ]; then
     sudo sed -i "s|LINK_WA|$LINK_WA|g" /root/pterodactyl/resources/scripts/components/dashboard/DashboardContainer.tsx
     sudo sed -i "s|LINK_GROUP|$LINK_GROUP|g" /root/pterodactyl/resources/scripts/components/dashboard/DashboardContainer.tsx
     sudo sed -i "s|LINK_CHNL|$LINK_CHNL|g" /root/pterodactyl/resources/scripts/components/dashboard/DashboardContainer.tsx
-    
 
-  sudo cp -rfT /root/pterodactyl /var/www/pterodactyl
-  curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-  sudo apt install -y nodejs
-  sudo npm i -g yarn
-  cd /var/www/pterodactyl
-  yarn add react-feather
-  php artisan migrate
-  yarn build:production
-  php artisan view:clear
-  sudo rm /root/C3.zip
-  sudo rm -rf /root/pterodactyl
+    sudo cp -rfT /root/pterodactyl /var/www/pterodactyl
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+    sudo apt install -y nodejs
+    sudo npm i -g yarn
+    cd /var/www/pterodactyl
+    yarn add react-feather
+    php artisan migrate
+    yarn build:production
+    php artisan view:clear
+    sudo rm /root/C3.zip
+    sudo rm -rf /root/pterodactyl
 
-  echo -e "                                                       "
-  echo -e "${GREEN}[+] =============================================== [+]${NC}"
-  echo -e "${GREEN}[+]                   INSTALL SUCCESS               [+]${NC}"
-  echo -e "${GREEN}[+] =============================================== [+]${NC}"
-  echo -e ""
-  sleep 5
-else
-  echo ""
-  echo "Pilihan tidak valid. silahkan pilih 1/2/3."
-fi
+    echo -e "                                                       "
+    echo -e "${GREEN}[+] =============================================== [+]${NC}"
+    echo -e "${GREEN}[+]                   INSTALL SUCCESS               [+]${NC}"
+    echo -e "${GREEN}[+] =============================================== [+]${NC}"
+    echo -e ""
+    sleep 5
+  else
+    echo ""
+    echo "Pilihan tidak valid. silahkan pilih 1/2/3."
+  fi
 }
-
 
 # Uninstall theme
 uninstall_theme() {
@@ -239,7 +217,6 @@ uninstall_theme() {
 # Main script
 display_welcome
 install_jq
-check_token
 
 while true; do
   clear
